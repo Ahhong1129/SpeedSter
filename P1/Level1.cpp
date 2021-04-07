@@ -20,13 +20,10 @@ Level1::~Level1()
 void Level1::init()
 {
 	sound->Init();
-	sound = new Sound("Deja Vu.wav", false);
+	sound = new Sound("sound/Deja Vu.wav", true);
 	sound->play();
 
-	carSound = new Sound("carsound.ogg", true);
-	carSound->play();
-
-	collectSound = new Sound("collectcoin.ogg", false);
+	collectSound = new Sound("sound/collectcoin.ogg", false);
 
 	D3DXCreateSprite(GGraphic::getInstance()->d3dDevice, &sprite);
 	   
@@ -314,22 +311,22 @@ void Level1::init()
 	driverFont_position.y = 460;
 
 	isMainCarMoving = false;
-	speed = (0.9f / animationRate) * 75;
+	speed = (0.9f / animationRate) * 70;
 	direction.x = 0;
 	direction.y = 1;
 
-	countDownTimer = 1;
+	countDownTimer = 60;
 
 	bgLength = 30000;
 
 	start = false;
+	
 }
 
 void Level1::update()
 {
 	sound->Update();
-	carSound->Update();
-
+	sound->volumeDown();
 	if (GInput::getInstance()->isKeyDown(DIK_UP))
 	{
 		cout << "UP" << endl;
@@ -339,7 +336,6 @@ void Level1::update()
 		direction.x = 0;
 		direction.y = -1;
 		startDrawing = false;
-		sound->stop();
 	}
 	
 	else if (GInput::getInstance()->isKeyDown(DIK_LEFT)) {
@@ -361,7 +357,6 @@ void Level1::update()
 	{
 		isMainCarMoving = false;
 	}
-	
 }
 
 void Level1::fixedUpdate() 
@@ -400,7 +395,9 @@ void Level1::fixedUpdate()
 			startDrawing = true;
 			mainCar_position.x = 110;
 			mainCar_position.y = 300;
+			sound->volumeUp();
 		}
+	
 	}
 
 	for (int i = 0; i < 9; i++) {
@@ -417,6 +414,7 @@ void Level1::fixedUpdate()
 		animationTimer += 1 / 60.0f;
 		D3DXVECTOR2 velocity = direction * (speed / 60.0f);
 		mainCar_position += velocity;
+		
 	}
 	
 
@@ -446,9 +444,11 @@ void Level1::fixedUpdate()
 		if (coinCollectScore >= 6) {
 			GameStateManager::getInstance()->changeGameState(GameStateManager::YOUWIN);
 			return Level1::init();
+			startDrawing = true;
 			if (startCount) {
 				countDownTimer -= (1 / 60.0);
 			}
+			
 		}
 		else {
 			GameStateManager::getInstance()->changeGameState(GameStateManager::GAMEOVERCOIN);
@@ -602,7 +602,6 @@ void Level1::draw()
 void Level1::release()
 {
 	sound->Release();
-	carSound->Release();
 	collectSound->Release();
 
 	sprite->Release();

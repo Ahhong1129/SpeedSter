@@ -1,6 +1,7 @@
 #pragma once
 #include "GameState.h"
 #include "GGraphic.h"
+#include"Sound.h"
 #include<d3d9.h>
 #include<d3dx9.h>
 class GameOver : public GameState

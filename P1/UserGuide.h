@@ -15,7 +15,6 @@ public:
 	D3DXMATRIX matUserGuide;
 	D3DXVECTOR3 UserGuidePosition;
 	RECT UserGuideRect;
-	Sound* sound;
 	void init();
 	void update();
 	void fixedUpdate();

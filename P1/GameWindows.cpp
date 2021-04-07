@@ -17,25 +17,16 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	case WM_KEYDOWN:
 		if (wParam == 27) {
 			PostQuitMessage(0);
+			break;
 		}
-		GameWindows::keyPressed = wParam;
-		break;
 
 	case WM_KEYUP:
-		GameWindows::keyPressed = 0;
-
-		
-		break;
 
 	//case WM_MOUSEMOVE:
 	//	GameWindows::mouseX = LOWORD(lParam);
 	//	GameWindows::mouseY = HIWORD(lParam);
 	//	printf("%d - %d\n", wParam, lParam);
 	//	break;
-
-	case WM_LBUTTONDOWN:
-		printf("%d - %d\n", wParam, lParam);
-		break;
 
 		//	Default handling for other messages.
 	default:
@@ -44,10 +35,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	return 0;
 }
 
-GameWindows::~GameWindows()
-{
-
-}
 GameWindows* GameWindows::sInstance = NULL;
 
 GameWindows* GameWindows::getInstance()
@@ -56,6 +43,10 @@ GameWindows* GameWindows::getInstance()
 		sInstance = new GameWindows;
 	}
 	return sInstance;
+}
+GameWindows::~GameWindows()
+{
+
 }
 
 void GameWindows::releaseInstance()
@@ -79,6 +70,7 @@ GameWindows::GameWindows()
 
 
 void GameWindows::init(){
+	
 	wndClass.hbrBackground = (HBRUSH)GetStockObject(BLACKONWHITE);
 	wndClass.hCursor = LoadCursor(GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_CURSOR1));
 	wndClass.hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1));

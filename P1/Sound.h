@@ -2,10 +2,10 @@
 #include <fmod.h>
 #include"GameWindows.h"
 
-#define SOUND_MAX 1.0f
+#define SOUND_MAX 3.0f
 #define SOUND_MIN 0.0f
 #define SOUND_DEFAULT 0.5f
-#define SOUND_WEIGHT 0.1f
+#define SOUND_WEIGHT 0.3f
 
 class Sound
 {

@@ -17,13 +17,13 @@ int main()
 	GGraphic* gGraphic = GGraphic::getInstance();
 	GInput* gInput = GInput::getInstance();
 	GameStateManager* gameStateManager = GameStateManager::getInstance();
+	Physic* physic = Physic::getInstance();
 
 
 	while (gWin->isWindowsRunning())
 	{
 		gInput->update();
 		gameStateManager->update();
-		/*gGraphic->update();*/
 		gGraphic->begin();
 		gameStateManager->draw();
 		gGraphic->end();
@@ -33,6 +33,7 @@ int main()
 	gWin->releaseInstance();
 	gGraphic->releaseInstance();
 	gInput->releaseInstance();
+	physic->releaseInstance();
 	
 
 	return 0;
