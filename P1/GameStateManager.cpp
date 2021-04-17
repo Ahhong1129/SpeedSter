@@ -61,7 +61,7 @@ GameStateManager::~GameStateManager()
 	gTimer = NULL;
 
 	for (int i = 0; i < gameStateList.size(); i++) {
-		delete gameStateList[1];
+		delete gameStateList[i];
 		gameStateList[i] = NULL;
 	}
 }

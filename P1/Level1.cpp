@@ -443,6 +443,7 @@ void Level1::fixedUpdate()
 	{
 		if (coinCollectScore >= 6) {
 			GameStateManager::getInstance()->changeGameState(GameStateManager::YOUWIN);
+			sound->stop();
 			return Level1::init();
 			startDrawing = true;
 			if (startCount) {
